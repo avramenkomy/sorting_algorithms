@@ -1,0 +1,13 @@
+.array {
+  margin: 0 auto;
+  padding: 20px 20px 0 20px; /* top right bottom left */
+  width: 100%;
+  min-height: 500px;
+  height: 100%;
+  border-bottom: 1px solid white;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: flex-end;
+}
