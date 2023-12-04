@@ -2,7 +2,7 @@
   background-color: rgb(252, 57, 7);
   border: 1px solid rgb(24,24,24);
   box-sizing: border-box;
-  width: 20px;
+  min-width: 3px;
 }
 
 .active {
