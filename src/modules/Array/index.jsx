@@ -13,7 +13,7 @@ function ArrayComponent() {
   const [arrSize, setArrSize] = useState(10);
   const [speedIterating, setSpeedIterating] = useState(100);
   const [arrValue, setArrayValue] = useState(createArrayOfNumbers(arrSize, 0, 500));
-  const [current, setCurrent] = useState(-1);
+  const [currents, setCurrents] = useState([]);
 
   let init = -1;
   let timeout;
@@ -22,13 +22,13 @@ function ArrayComponent() {
   const iteratingOnArray = () => {
     clearTimeout(timeout);
     init = init + 1;
-    setCurrent(init);
+    setCurrents([init]);
 
     timeout = setTimeout(() => {
       if (init < arrValue.length) {
         iteratingOnArray();
       } else {
-        setCurrent(-1);
+        setCurrents([]);
         init = -1;
       }
     }, speedIterating);
@@ -36,6 +36,26 @@ function ArrayComponent() {
 
   const getNewArray = () => {
     setArrayValue(createArrayOfNumbers(arrSize, 2, 500));
+  }
+
+  function bubblesSort (arr) {
+    let newArray = Array.from(arr);
+
+    for (let i = 0; i < newArray.length; i++) {
+      for (let j = 0; j < newArray.length - 1; j++) {
+        if (newArray[j] > newArray[j + 1]) {
+          newArray = positionExchange(newArray, j, j+1);
+        }
+      }
+    }
+
+    return newArray;
+  }
+
+  const bubblesSortHandler = () => {
+    let newArray = Array.from(arrValue);
+    newArray = bubblesSort(newArray);
+    setArrayValue(newArray);
   }
 
   return (
@@ -47,11 +67,15 @@ function ArrayComponent() {
             h={h}
             w={elemWidth}
             id={idx}
-            color={idx === current ? ACTIVE_COLOR : DEFAULT_COLOR}
+            color={
+              currents.some(item => item === idx)
+                ? ACTIVE_COLOR
+                : DEFAULT_COLOR
+            }
           />
         ))}
       </div>
-      <button onClick={iteratingOnArray} disabled={current !== -1}>Start</button>
+      <button onClick={iteratingOnArray} disabled={!!currents.length}>Start</button>
       <button onClick={getNewArray}>Create Array</button>
       <input
         id="arrSize"
@@ -74,6 +98,8 @@ function ArrayComponent() {
         onChange={event => { setSpeedIterating(-event.target.value + 500) }}
       />
       <label htmlFor="speedSorting">Sorting Speed</label>
+
+      <button onClick={bubblesSortHandler}>Bubbles Sort</button>
     </React.Fragment>
   )
 }
