@@ -3,7 +3,7 @@ import Element from './Element';
 import './style.css';
 
 import {
-  positionExchange, createArrayOfNumbers,
+  createArrayOfNumbers,
 } from '../../utils/AuxiliaryFunctions';
 
 const ACTIVE_COLOR = 'rgb(255, 255, 255)';
@@ -18,11 +18,14 @@ function ArrayComponent() {
   let init = -1;
   let timeout;
   let elemWidth = window.screen.width / arrValue.length;
+  let i = 0;
+  let j = 0;
 
   const iteratingOnArray = () => {
     clearTimeout(timeout);
     init = init + 1;
-    setCurrents([init]);
+    document.getElementById(`${init}`)?.classList?.remove('sorted');
+    setCurrents([init, init + 1, init + 2, init + 3]);
 
     timeout = setTimeout(() => {
       if (init < arrValue.length) {
@@ -36,27 +39,49 @@ function ArrayComponent() {
 
   const getNewArray = () => {
     setArrayValue(createArrayOfNumbers(arrSize, 2, 500));
-  }
 
-  function bubblesSort (arr) {
-    let newArray = Array.from(arr);
-
-    for (let i = 0; i < newArray.length; i++) {
-      for (let j = 0; j < newArray.length - 1; j++) {
-        if (newArray[j] > newArray[j + 1]) {
-          newArray = positionExchange(newArray, j, j+1);
-        }
-      }
+    for (let i = 0; i < arrValue.length; i++) {
+      document.getElementById(i).classList.remove('sorted');
     }
-
-    return newArray;
   }
 
-  const bubblesSortHandler = () => {
-    let newArray = Array.from(arrValue);
-    newArray = bubblesSort(newArray);
-    setArrayValue(newArray);
+  function bubblesSorting() {
+    if (i < arrValue.length) {
+      innerCycle();
+    } else {
+      setCurrents([]);
+      iteratingOnArray();
+      i = 0;
+      j = 0;
+      return;
+    }
   }
+
+  function innerCycle() {
+    setCurrents([j, j+1]);
+
+    if (j < arrValue.length - (i+1)) {
+      timeout = setTimeout(() => {
+        if (arrValue[j] > arrValue[j + 1]) {
+          [arrValue[j], arrValue[j+1]] = [arrValue[j+1], arrValue[j]];
+        }
+        j = j + 1;
+        innerCycle();
+      }, speedIterating);
+    } else {
+      j = 0;
+      i = i + 1;
+      clearTimeout(timeout);
+      document.getElementById(arrValue.length - i).classList.toggle('sorted');
+      bubblesSorting();
+    }
+  };
+
+  const handleSortinButton = () => {
+    bubblesSorting();
+  }
+
+  const disabled = !!currents.length;
 
   return (
     <React.Fragment>
@@ -75,8 +100,11 @@ function ArrayComponent() {
           />
         ))}
       </div>
-      <button onClick={iteratingOnArray} disabled={!!currents.length}>Start</button>
-      <button onClick={getNewArray}>Create Array</button>
+
+      <button onClick={iteratingOnArray} disabled={disabled} >Start</button>
+
+      <button onClick={getNewArray} disabled={disabled}>Create Array</button>
+
       <input
         id="arrSize"
         type="range"
@@ -85,6 +113,7 @@ function ArrayComponent() {
         max={450}
         step={5}
         onChange={event => { setArrSize(event.target.value) }}
+        disabled={disabled}
       />
       <label htmlFor="arrSize">Size of array</label>
 
@@ -95,11 +124,17 @@ function ArrayComponent() {
         min={0}
         max={500}
         step={10}
-        onChange={event => { setSpeedIterating(-event.target.value + 500) }}
+        onChange={event => { setSpeedIterating(500 - event.target.value) }}
+        disabled={disabled}
       />
       <label htmlFor="speedSorting">Sorting Speed</label>
 
-      <button onClick={bubblesSortHandler}>Bubbles Sort</button>
+      <button
+        onClick={handleSortinButton}
+        disabled={disabled}
+      >
+        Bubbles Sort
+      </button>
     </React.Fragment>
   )
 }

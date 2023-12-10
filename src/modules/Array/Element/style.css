@@ -6,5 +6,9 @@
 }
 
 .active {
-  background-color: aliceblue;
+  background-color: aliceblue !important;
+}
+
+.sorted {
+  background-color: rgb(78, 210, 108) !important;
 }
