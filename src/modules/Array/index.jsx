@@ -10,17 +10,19 @@ const ACTIVE_COLOR = 'rgb(255, 255, 255)';
 const DEFAULT_COLOR = 'rgb(252, 57, 7)';
 
 function ArrayComponent() {
+  const [arrSize, setArrSize] = useState(10);
+  const [speedIterating, setSpeedIterating] = useState(100);
+  const [arrValue, setArrayValue] = useState(createArrayOfNumbers(arrSize, 0, 500));
   const [current, setCurrent] = useState(-1);
-  const [arrValue, setArrayValue] = useState(createArrayOfNumbers(20, 2, 500));
 
   let init = -1;
   let timeout;
   let elemWidth = window.screen.width / arrValue.length;
-  const speedIterating = (20 / arrValue.length) * 500;
 
   const iteratingOnArray = () => {
-    setCurrent(prevState => prevState + 1);
+    clearTimeout(timeout);
     init = init + 1;
+    setCurrent(init);
 
     timeout = setTimeout(() => {
       if (init < arrValue.length) {
@@ -32,12 +34,8 @@ function ArrayComponent() {
     }, speedIterating);
   }
 
-  const arrModify = () => {
-    setArrayValue(prevState => positionExchange(prevState, 2, 3));
-  }
-
   const getNewArray = () => {
-    setArrayValue(createArrayOfNumbers(400, 2, 500));
+    setArrayValue(createArrayOfNumbers(arrSize, 2, 500));
   }
 
   return (
@@ -53,9 +51,29 @@ function ArrayComponent() {
           />
         ))}
       </div>
-      <button onClick={iteratingOnArray}>Start</button>
+      <button onClick={iteratingOnArray} disabled={current !== -1}>Start</button>
       <button onClick={getNewArray}>Create Array</button>
-      <button onClick={arrModify}>ChangePos</button>
+      <input
+        id="arrSize"
+        type="range"
+        name={arrSize}
+        min={10}
+        max={450}
+        step={5}
+        onChange={event => { setArrSize(event.target.value) }}
+      />
+      <label htmlFor="arrSize">Size of array</label>
+
+      <input
+        id="speedSorting"
+        type="range"
+        name={speedIterating}
+        min={0}
+        max={500}
+        step={10}
+        onChange={event => { setSpeedIterating(-event.target.value + 500) }}
+      />
+      <label htmlFor="speedSorting">Sorting Speed</label>
     </React.Fragment>
   )
 }
