@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Element from './Element';
-import './style.css';
+import './styles.css';
 
 import {
   createArrayOfNumbers,
@@ -114,40 +114,42 @@ function ArrayComponent() {
         ))}
       </div>
 
-      <button onClick={iteratingOnArray} disabled={disabled}>Start</button>
+      <div className="control-panel">
+        <button onClick={iteratingOnArray} disabled={disabled}>Start</button>
 
-      <button onClick={getNewArray} disabled={disabled}>Create Array</button>
+        <button onClick={getNewArray} disabled={disabled}>Create Array</button>
 
-      <input
-        id="arrSize"
-        type="range"
-        name={arrSize}
-        min={10}
-        max={maxArraySize}
-        step={5}
-        onChange={event => { setArrSize(event.target.value) }}
-        disabled={disabled}
-      />
-      <label htmlFor="arrSize">Size of array</label>
+        <input
+          id="arrSize"
+          type="range"
+          name={arrSize}
+          min={10}
+          max={maxArraySize}
+          step={5}
+          onChange={event => { setArrSize(event.target.value) }}
+          disabled={disabled}
+        />
+        <label htmlFor="arrSize">Size of array</label>
 
-      <input
-        id="speedSorting"
-        type="range"
-        name={speedIterating}
-        min={0}
-        max={500}
-        step={10}
-        onChange={event => { setSpeedIterating(500 - event.target.value) }}
-        disabled={disabled}
-      />
-      <label htmlFor="speedSorting">Sorting Speed</label>
+        <input
+          id="speedSorting"
+          type="range"
+          name={speedIterating}
+          min={0}
+          max={500}
+          step={10}
+          onChange={event => { setSpeedIterating(500 - event.target.value) }}
+          disabled={disabled}
+        />
+        <label htmlFor="speedSorting">Sorting Speed</label>
 
-      <button
-        onClick={handleSortinButton}
-        disabled={disabled}
-      >
-        Bubbles Sort
-      </button>
+        <button
+          onClick={handleSortinButton}
+          disabled={disabled}
+        >
+          Bubbles Sort
+        </button>
+      </div>
     </React.Fragment>
   )
 }
