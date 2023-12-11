@@ -5,15 +5,23 @@ import './style.css';
 import {
   createArrayOfNumbers,
 } from '../../utils/AuxiliaryFunctions';
+import { useResize } from '../../hooks/useResize';
 
 const ACTIVE_COLOR = 'rgb(255, 255, 255)';
 const DEFAULT_COLOR = 'rgb(252, 57, 7)';
 
 function ArrayComponent() {
+  const screenWidth = useResize().width;
+
   const [arrSize, setArrSize] = useState(10);
   const [speedIterating, setSpeedIterating] = useState(100);
   const [arrValue, setArrayValue] = useState(createArrayOfNumbers(arrSize, 0, 500));
   const [currents, setCurrents] = useState([]);
+  const [maxArraySize, setMaxArraySize] = useState(Math.floor((screenWidth - 40) / 3));
+
+  React.useEffect(() => {
+    setMaxArraySize(Math.floor((screenWidth - 40) / 3));
+  }, [screenWidth]);
 
   let init = -1;
   let timeout;
@@ -38,7 +46,12 @@ function ArrayComponent() {
   }
 
   const getNewArray = () => {
-    setArrayValue(createArrayOfNumbers(arrSize, 2, 500));
+    if (arrSize > maxArraySize) {
+      setArrayValue(createArrayOfNumbers(maxArraySize, 2, 500));
+      setArrSize(maxArraySize);
+    } else {
+      setArrayValue(createArrayOfNumbers(arrSize, 2, 500));
+    }
 
     for (let i = 0; i < arrValue.length; i++) {
       document.getElementById(i).classList.remove('sorted');
@@ -47,7 +60,7 @@ function ArrayComponent() {
 
   function bubblesSorting() {
     if (i < arrValue.length) {
-      innerCycle();
+      innerBubblesSortingCycle();
     } else {
       setCurrents([]);
       iteratingOnArray();
@@ -57,7 +70,7 @@ function ArrayComponent() {
     }
   }
 
-  function innerCycle() {
+  function innerBubblesSortingCycle() {
     setCurrents([j, j+1]);
 
     if (j < arrValue.length - (i+1)) {
@@ -66,7 +79,7 @@ function ArrayComponent() {
           [arrValue[j], arrValue[j+1]] = [arrValue[j+1], arrValue[j]];
         }
         j = j + 1;
-        innerCycle();
+        innerBubblesSortingCycle();
       }, speedIterating);
     } else {
       j = 0;
@@ -101,7 +114,7 @@ function ArrayComponent() {
         ))}
       </div>
 
-      <button onClick={iteratingOnArray} disabled={disabled} >Start</button>
+      <button onClick={iteratingOnArray} disabled={disabled}>Start</button>
 
       <button onClick={getNewArray} disabled={disabled}>Create Array</button>
 
@@ -110,7 +123,7 @@ function ArrayComponent() {
         type="range"
         name={arrSize}
         min={10}
-        max={450}
+        max={maxArraySize}
         step={5}
         onChange={event => { setArrSize(event.target.value) }}
         disabled={disabled}
