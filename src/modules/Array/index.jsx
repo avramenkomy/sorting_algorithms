@@ -25,7 +25,7 @@ function ArrayComponent() {
 
   let init = -1;
   let timeout;
-  let elemWidth = window.screen.width / arrValue.length;
+  let elemWidth = screenWidth / arrValue.length;
   let i = 0;
   let j = 0;
 
