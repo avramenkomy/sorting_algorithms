@@ -90,8 +90,47 @@ function ArrayComponent() {
     }
   };
 
-  const handleSortinButton = () => {
-    bubblesSorting();
+  let min = 0;
+
+  function selectedSorting() {
+    if (i < arrValue.length - 1) {
+      innerSelectedSortingCycle();
+    } else {
+      setCurrents([]);
+      iteratingOnArray();
+      i = 0;
+      j = 0;
+      min = 0;
+      return;
+    }
+  }
+
+  function innerSelectedSortingCycle() {
+    setCurrents([i, j]);
+
+    if (j < arrValue.length) {
+      timeout = setTimeout(() => {
+        if (arrValue[min] > arrValue[j]) {
+          min = j;
+        }
+        j = j + 1;
+        innerSelectedSortingCycle();
+      }, speedIterating);
+    } else {
+      [arrValue[i], arrValue[min]] = [arrValue[min], arrValue[i]];
+      document.getElementById(i).classList.toggle('sorted');
+      i = i + 1;
+      j = i + 1;
+      min = i;
+      clearTimeout(timeout);      
+      selectedSorting();
+    }
+  }
+  
+
+  const handleSortinButton = sortingType => {
+    sortingType === 'bubbles' && bubblesSorting();
+    sortingType === 'selecting' && selectedSorting();
   }
 
   const disabled = !!currents.length;
@@ -144,10 +183,20 @@ function ArrayComponent() {
         <label htmlFor="speedSorting">Sorting Speed</label>
 
         <button
-          onClick={handleSortinButton}
+          onClick={() => handleSortinButton('bubbles')}
           disabled={disabled}
         >
           Bubbles Sort
+        </button>
+
+        <button
+          onClick={() => {
+            j = j + 1;
+            handleSortinButton('selecting');
+          }}
+          disabled={disabled}
+        >
+          Selected Sort
         </button>
       </div>
     </React.Fragment>
