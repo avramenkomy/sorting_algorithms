@@ -152,8 +152,6 @@ function ArrayComponent() {
       </div>
 
       <div className="control-panel">
-        <button onClick={iteratingOnArray} disabled={disabled}>Start</button>
-
         <button onClick={getNewArray} disabled={disabled}>Create Array</button>
 
         <input
