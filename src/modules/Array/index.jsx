@@ -28,6 +28,7 @@ function ArrayComponent() {
   let elemWidth = screenWidth / arrValue.length;
   let i = 0;
   let j = 0;
+  let min = 0;
 
   const iteratingOnArray = () => {
     clearTimeout(timeout);
@@ -54,7 +55,7 @@ function ArrayComponent() {
     }
 
     for (let i = 0; i < arrValue.length; i++) {
-      document.getElementById(i).classList.remove('sorted');
+      document.getElementById(i).className = 'arr-elem';
     }
   }
 
@@ -90,18 +91,16 @@ function ArrayComponent() {
     }
   };
 
-  let min = 0;
-
   function selectedSorting() {
     if (i < arrValue.length - 1) {
       innerSelectedSortingCycle();
     } else {
       setCurrents([]);
+      document.getElementById(i).classList.toggle('sorted');
       iteratingOnArray();
       i = 0;
       j = 0;
       min = 0;
-      return;
     }
   }
 
@@ -125,8 +124,7 @@ function ArrayComponent() {
       clearTimeout(timeout);      
       selectedSorting();
     }
-  }
-  
+  }  
 
   const handleSortinButton = sortingType => {
     sortingType === 'bubbles' && bubblesSorting();
