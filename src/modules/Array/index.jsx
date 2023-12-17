@@ -15,9 +15,13 @@ function ArrayComponent() {
 
   const [arrSize, setArrSize] = useState(10);
   const [speedIterating, setSpeedIterating] = useState(100);
-  const [arrValue, setArrayValue] = useState(createArrayOfNumbers(arrSize, 0, 500));
+  const [arrValue, setArrayValue] = useState(
+    createArrayOfNumbers(arrSize, 0, 500)
+  );
   const [currents, setCurrents] = useState([]);
-  const [maxArraySize, setMaxArraySize] = useState(Math.floor((screenWidth - 40) / 3));
+  const [maxArraySize, setMaxArraySize] = useState(
+    Math.floor((screenWidth - 40) / 3)
+  );
 
   React.useEffect(() => {
     setMaxArraySize(Math.floor((screenWidth - 40) / 3));
@@ -152,7 +156,12 @@ function ArrayComponent() {
       </div>
 
       <div className="control-panel">
-        <button onClick={getNewArray} disabled={disabled}>Create Array</button>
+        <button
+          onClick={getNewArray}
+          disabled={disabled}
+        >
+          Create Array
+        </button>
 
         <input
           id="arrSize"
