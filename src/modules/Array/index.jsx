@@ -7,6 +7,8 @@ import {
 } from '../../utils/AuxiliaryFunctions';
 import { useResize } from '../../hooks/useResize';
 
+import Button from '../Controls/Button/Button';
+
 const ACTIVE_COLOR = 'rgb(255, 255, 255)';
 const DEFAULT_COLOR = 'rgb(252, 57, 7)';
 
@@ -156,12 +158,13 @@ function ArrayComponent() {
       </div>
 
       <div className="control-panel">
-        <button
+        <Button
           onClick={getNewArray}
           disabled={disabled}
+          className="reset"
         >
           Create Array
-        </button>
+        </Button>
 
         <input
           id="arrSize"
@@ -187,14 +190,16 @@ function ArrayComponent() {
         />
         <label htmlFor="speedSorting">Sorting Speed</label>
 
-        <button
+        <Button
+          className="sort"
           onClick={() => handleSortinButton('bubbles')}
           disabled={disabled}
         >
           Bubbles Sort
-        </button>
+        </Button>
 
-        <button
+        <Button
+          className="sort"
           onClick={() => {
             j = j + 1;
             handleSortinButton('selecting');
@@ -202,7 +207,7 @@ function ArrayComponent() {
           disabled={disabled}
         >
           Selected Sort
-        </button>
+        </Button>
       </div>
     </React.Fragment>
   )
