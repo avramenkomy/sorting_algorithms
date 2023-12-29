@@ -5,18 +5,20 @@ import './styles.css';
 import {
   createArrayOfNumbers,
 } from '../../utils/AuxiliaryFunctions';
-import { useResize } from '../../hooks/useResize';
+import { useResize, useBrowser } from '../../hooks';
 
 import Button from '../Controls/Button/Button';
+import InputRange from '../Controls/InputRange';
 
 const ACTIVE_COLOR = 'rgb(255, 255, 255)';
 const DEFAULT_COLOR = 'rgb(252, 57, 7)';
 
 function ArrayComponent() {
   const screenWidth = useResize().width;
+  const browser = useBrowser()?.browser;
 
   const [arrSize, setArrSize] = useState(10);
-  const [speedIterating, setSpeedIterating] = useState(100);
+  const [speedIterating, setSpeedIterating] = useState(250);
   const [arrValue, setArrayValue] = useState(
     createArrayOfNumbers(arrSize, 0, 500)
   );
@@ -28,6 +30,22 @@ function ArrayComponent() {
   React.useEffect(() => {
     setMaxArraySize(Math.floor((screenWidth - 40) / 3));
   }, [screenWidth]);
+
+  if (browser === 'Chrome' || browser === 'Safari') {
+    const element = document.getElementById('speedSorting');
+
+    let percent = element?.value/500 * 100;
+    let fill = percent > 50 ? `${percent}%` : `calc(${percent}% + 2px)`;
+    element.style.background = `linear-gradient(to right, #367ebd 0%, #367ebd ${fill}, #fff ${percent}%, #fff 100%)`;
+  }
+
+  if (browser === 'Chrome'|| browser === 'Safari') {
+    const element = document.getElementById('arrSize');
+
+    let percent = (arrSize - 10)/(maxArraySize - 10) * 100;
+    let fill = percent > 50 ? `${percent}%` : `calc(${percent}% + 2px)`;
+    element.style.background = `linear-gradient(to right, #367ebd 0%, #367ebd ${fill}, #fff ${percent}%, #fff 100%)`;
+  }
 
   let init = -1;
   let timeout;
@@ -139,6 +157,26 @@ function ArrayComponent() {
 
   const disabled = !!currents.length;
 
+  const arrSizeOnChange = event => {
+    setArrSize(event.target.value);
+
+    if (browser === 'Chrome') {
+      let percent = (event.target.value - 10)/(maxArraySize - 10) * 100;
+      let fill = percent > 50 ? `${percent}%` : `calc(${percent}% + 2px)`;
+      document.getElementById('arrSize').style.background = `linear-gradient(to right, #367ebd 0%, #367ebd ${fill}, #fff ${percent}%, #fff 100%)`;
+    }
+  }
+
+  const speedIteratingOnChange = event => {
+    setSpeedIterating(500 - event.target.value);
+
+    if (browser === 'Chrome') {
+      let percent = event.target.value/500 * 100;
+      let fill = percent > 50 ? `${percent}%` : `calc(${percent}% + 2px)`;
+      document.getElementById('speedSorting').style.background = `linear-gradient(to right, #367ebd 0%, #367ebd ${fill}, #fff ${percent}%, #fff 100%)`;
+    }
+  }
+
   return (
     <React.Fragment>
       <div className="array">
@@ -166,29 +204,26 @@ function ArrayComponent() {
           Create Array
         </Button>
 
-        <input
+        <InputRange
           id="arrSize"
-          type="range"
-          name={arrSize}
+          value={arrSize}
           min={10}
           max={maxArraySize}
           step={5}
-          onChange={event => { setArrSize(event.target.value) }}
+          onChange={arrSizeOnChange}
           disabled={disabled}
+          labelText="size of array"
         />
-        <label htmlFor="arrSize">Size of array</label>
 
-        <input
+        <InputRange
           id="speedSorting"
-          type="range"
-          name={speedIterating}
           min={0}
           max={500}
           step={10}
-          onChange={event => { setSpeedIterating(500 - event.target.value) }}
+          onChange={speedIteratingOnChange}
           disabled={disabled}
+          labelText="speed of sorting"
         />
-        <label htmlFor="speedSorting">Sorting Speed</label>
 
         <Button
           className="sort"
