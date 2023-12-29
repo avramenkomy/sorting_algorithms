@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-// import themeReducer from './themeReducer';
+import themeReducer from './themeReducer';
 
 
 const rootReducer = combineReducers({
-  // theme: themeReducer,
+  theme: themeReducer,
   // ... all reducers connect here
 });
 
