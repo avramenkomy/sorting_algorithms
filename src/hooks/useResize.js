@@ -3,7 +3,7 @@ import {
   SCREEN_SM, SCREEN_MD, SCREEN_LG, SCREEN_XL, SCREEN_XXL,
 } from '../constants/screenBreakpoints';
 
-export const useResize = () => {
+const useResize = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -25,3 +25,5 @@ export const useResize = () => {
     isScreenXxl: width >= SCREEN_XXL,
   };
 };
+
+export default useResize;
