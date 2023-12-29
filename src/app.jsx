@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 
+import Header from './components/Header';
+
 function App() {
 
   const colorMode = createTheme({
@@ -15,7 +17,7 @@ function App() {
   return (
     <ThemeProvider theme={colorMode}>
       <CssBaseline />
-      <header></header>
+      <Header />
       <main></main>
       <footer></footer>
     </ThemeProvider>
