@@ -23,8 +23,8 @@ function ThemeToggle() {
   return (
     <IconButton onClick={handleThemeOnChange}>
       {theme === 'light'
-        ? <Brightness7Icon sx={{ color: teal[50]}} />
-        : <Brightness4Icon sx={{ color: teal[50]}} />
+        ? <Brightness4Icon sx={{ color: teal[50]}} />
+        : <Brightness7Icon sx={{ color: teal[50]}} />
       }
     </IconButton>
   )
