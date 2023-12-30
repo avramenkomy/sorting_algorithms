@@ -9,12 +9,12 @@ function ControlBoard() {
 
   return(
     <React.Fragment>
-        <Grid item xs={12} md={4} display="flex">
-          <ArraySettings />
-        </Grid>
-        <Grid item xs={12} md={8} display="flex">
-          <SortTypes />
-        </Grid>
+      <Grid item xs={12} md={4} display="flex">
+        <ArraySettings />
+      </Grid>
+      <Grid item xs={12} md={8} display="flex">
+        <SortTypes />
+      </Grid>
     </React.Fragment>
   )
 }
