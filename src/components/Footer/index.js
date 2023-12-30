@@ -20,8 +20,8 @@ export default function Footer() {
     >
       <Container maxWidth="sm">
         <Typography variant="body2" color="text.secondary" align="center">
-          {"© "}
-          Designed by Mikhail Avramenko
+          {"©"}&nbsp;
+          Created&nbsp;by&nbsp;Mikhail&nbsp;Avramenko&nbsp;
           {new Date().getFullYear()}
           {"."}
         </Typography>
