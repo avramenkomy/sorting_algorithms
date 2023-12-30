@@ -2,15 +2,19 @@ import React from 'react';
 
 import { Grid } from '@mui/material';
 
+import ControlBoard from '../ControlBoard';
+import ArrayBoard from '../ArrayBoard';
+
 function MainContent() {
 
   return (
-    <Grid container component="main" flexDirection="column" flexWrap="nowrap">
+    <Grid container component="main" flexDirection="column" flexWrap="nowrap" p={0.5}>
       <Grid item container flexGrow={1}>
-        <Grid item xs={12} md={4}></Grid>
-        <Grid item xs={12} md={8}></Grid>
+        <ControlBoard />
       </Grid>
-      <Grid item flexGrow={3}></Grid>
+      <Grid item flexGrow={3} display="flex">
+        <ArrayBoard />
+      </Grid>
     </Grid>
   )
 }
