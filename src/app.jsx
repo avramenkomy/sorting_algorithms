@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
       <CssBaseline />
       <Header />
       <main></main>
-      <footer></footer>
+      <Footer />
     </ThemeProvider>
   );
 }
