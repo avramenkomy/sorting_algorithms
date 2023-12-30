@@ -8,7 +8,13 @@ import ArrayBoard from '../ArrayBoard';
 function MainContent() {
 
   return (
-    <Grid container component="main" flexDirection="column" flexWrap="nowrap" p={0.5}>
+    <Grid
+      container
+      component="main"
+      flexDirection="column"
+      flexWrap="nowrap"
+      p={0.5}
+    >
       <Grid item container flexGrow={1}>
         <ControlBoard />
       </Grid>
