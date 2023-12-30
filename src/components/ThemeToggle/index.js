@@ -10,7 +10,7 @@ import { teal } from '@mui/material/colors';
 
 
 
-function ThemeToggle() {
+function ThemeToggle({fontSize}) {
   const theme = useSelector(state => state.theme.mode);
   const dispatch = useDispatch();
 
@@ -23,8 +23,8 @@ function ThemeToggle() {
   return (
     <IconButton onClick={handleThemeOnChange}>
       {theme === 'light'
-        ? <Brightness4Icon sx={{ color: teal[50]}} />
-        : <Brightness7Icon sx={{ color: teal[50]}} />
+        ? <Brightness4Icon sx={{ color: teal[50]}} fontSize={`${fontSize}`} />
+        : <Brightness7Icon sx={{ color: teal[50]}} fontSize={`${fontSize}`} />
       }
     </IconButton>
   )
