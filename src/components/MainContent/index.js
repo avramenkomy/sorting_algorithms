@@ -15,10 +15,10 @@ function MainContent() {
       flexWrap="nowrap"
       p={0.5}
     >
-      <Grid item container>
+      <Grid item container minHeight={225} height="30%">
         <ControlBoard />
       </Grid>
-      <Grid item flexGrow={1} display="flex">
+      <Grid item flexGrow={1} display="flex" minHeight={325}>
         <ArrayBoard />
       </Grid>
     </Grid>
