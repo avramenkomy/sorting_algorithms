@@ -1,6 +1,18 @@
 import React from 'react';
 
-import { Paper, Box } from '@mui/material';
+import { Paper, Box, Grid, Button } from '@mui/material';
+
+
+const SORT_TYPES = [
+  'Bubbles',
+  'Selection',
+  'Merge',
+  'Quick',
+  'Insertion',
+  'Shell',
+  'Bucket',
+  'Heap',
+]
 
 
 function SortTypes() {
@@ -17,7 +29,20 @@ function SortTypes() {
         },
       }}
     >
-      <Paper elevation={3} />
+      <Paper elevation={3} sx={{ padding: '4px' }}>
+        <Grid
+          container
+          spacing={1}
+          flexDirection="row"
+          flexWrap="wrap"
+        >
+          {SORT_TYPES.map(item => (
+            <Grid item>
+              <Button variant="contained">{item}</Button>
+            </Grid>
+          ))}
+        </Grid>
+      </Paper>
     </Box>
   )
 }
