@@ -37,7 +37,7 @@ function SortTypes() {
           flexWrap="wrap"
         >
           {SORT_TYPES.map(item => (
-            <Grid item>
+            <Grid item key={item}>
               <Button variant="contained">{item}</Button>
             </Grid>
           ))}
