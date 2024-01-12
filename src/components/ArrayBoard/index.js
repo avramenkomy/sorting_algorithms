@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { Paper, Box } from '@mui/material';
+import ArrayComponent from './Array';
 
 
 function ArrayBoard() {
 
   return(
     <Box
+      id="array_container"
       sx={{
         display: 'flex',
         width: '100%',
@@ -17,7 +19,9 @@ function ArrayBoard() {
         },
       }}
     >
-      <Paper elevation={3} />
+      <Paper elevation={3}>
+        <ArrayComponent />
+      </Paper>
     </Box>
   )
 }
