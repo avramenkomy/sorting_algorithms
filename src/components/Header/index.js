@@ -7,7 +7,7 @@ import ThemeToggle from '../ThemeToggle';
 
 
 const StyledAppBar = styled(AppBar)`
-  min-height: 60px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
