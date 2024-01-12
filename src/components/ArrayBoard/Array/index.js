@@ -16,6 +16,12 @@ function ArrayComponent() {
   const max = Math.max(...ARRAY);
   const screenWidth = useResize().width;
 
+  /**
+   * 36 это сумма левых и правых
+   * паддингов контейнера main 4 + 4
+   * паддингов контейнера массива 10 + 10
+   * марджинов элемента paper для контейнера массива 4 + 4
+   */
   const elemWidth = (screenWidth - 36) / ARRAY.length;
 
   return (
