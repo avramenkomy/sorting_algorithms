@@ -4,6 +4,7 @@ const initState = {
   mode: 'light',
 }
 
+
 const themeReducer = (state=initState, action) => {
   switch(action.type) {
     case SET_LIGHT_THEME:
