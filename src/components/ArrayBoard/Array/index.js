@@ -1,5 +1,6 @@
 import React from 'react';
 import uniqid from 'uniqid';
+import { useSelector } from 'react-redux';
 
 import useResize from '../../../hooks/useResize';
 
@@ -7,13 +8,11 @@ import './styles.css';
 
 import ArrayElement from './item';
 
-const ARRAY = [
-  330, 492, 420, 381, 498, 482, 334, 378, 46, 293, 413, 33, 234, 196, 257, 0,
-  33, 355, 57, 83, 335, 300, 65, 187, 422, 286, 116, 432, 283, 456, 157, 2, 1000
-];
 
 function ArrayComponent() {
-  const max = Math.max(...ARRAY);
+  const array = useSelector(state => state.array.array);
+
+  const max = Math.max(...array);
   const screenWidth = useResize().width;
 
   /**
@@ -22,11 +21,11 @@ function ArrayComponent() {
    * паддингов контейнера массива 10 + 10
    * марджинов элемента paper для контейнера массива 4 + 4
    */
-  const elemWidth = (screenWidth - 36) / ARRAY.length;
+  const elemWidth = (screenWidth - 36) / array.length;
 
   return (
     <div className='array-container'>
-      {ARRAY.map((item, index) => (
+      {array.map((item, index) => (
         <ArrayElement
           key={uniqid()}
           id={item}

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setArray } from '../../redux/actions/setArray';
 
 import { Grid, Box, Paper, Button } from '@mui/material';
 
@@ -6,6 +8,12 @@ import RangeElement from '../Elements/Range';
 
 
 function ArraySettings() {
+
+  const dispatch = useDispatch();
+
+  const createNewArray = (_, length=33, min=0, max=1000) => {
+    dispatch(setArray(length, min, max));
+  }
 
   return(
     <Box
@@ -44,7 +52,12 @@ function ArraySettings() {
           </Grid>
 
           <Grid item alignSelf="center">
-            <Button variant="outlined">Create</Button>
+            <Button
+              variant="outlined"
+              onClick={createNewArray}
+            >
+              Create
+            </Button>
           </Grid>
         </Grid>
       </Paper>
