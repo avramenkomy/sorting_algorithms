@@ -3,3 +3,4 @@ export const SET_DARK_THEME = 'THEME/SET_DARK';
 
 
 export const CREATE_ARRAY = 'ARRAY/CREATE';
+export const SPEED_ONCHANGE = 'ARRAY/SPEED_ONCHANGE';

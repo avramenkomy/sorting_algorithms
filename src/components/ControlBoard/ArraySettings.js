@@ -1,6 +1,8 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setArray } from '../../redux/actions/setArray';
+import { setSortingSpeed } from '../../redux/actions/setSortingSpeed';
+import useResize from '../../hooks/useResize';
 
 import { Grid, Box, Paper, Button } from '@mui/material';
 
@@ -10,9 +12,26 @@ import RangeElement from '../Elements/Range';
 function ArraySettings() {
 
   const dispatch = useDispatch();
+  const screenWidth = useResize().width;
 
-  const createNewArray = (_, length=33, min=0, max=1000) => {
-    dispatch(setArray(length, min, max));
+  const [ maxArraySize, setMaxArraySize ] = useState(
+    Math.floor((screenWidth - 36) / 3)
+  );
+  const [ arrSize, setArrSize ] = useState(20);
+  const [ sortSpeed, setSortSpeed ] = useState(
+    useSelector(state => state.array.speed)
+  );
+
+  useEffect(() => {
+    setMaxArraySize(Math.floor((screenWidth - 36) / 3));
+  }, [screenWidth]);
+
+  useEffect(() => {
+    dispatch(setSortingSpeed(sortSpeed));
+  }, [sortSpeed]);
+
+  const createNewArray = () => {
+    dispatch(setArray(arrSize, 0, 1000));
   }
 
   return(
@@ -43,11 +62,24 @@ function ArraySettings() {
             spacing={1}
           >
             <Grid item>
-              <RangeElement defaultValue={30} label="Array size" />
+              <RangeElement
+                label="Array size"
+                val={arrSize}
+                min={10}
+                max={maxArraySize}
+                onChange={newValue => setArrSize(newValue)}
+              />
             </Grid>
 
             <Grid item>
-              <RangeElement defaultValue={30} label="Speed sorting" />
+              <RangeElement
+                label="Speed sorting"
+                val={sortSpeed}
+                min={0}
+                max={500}
+                step={10}
+                onChange={newValue => setSortSpeed(newValue)}
+              />
             </Grid>
           </Grid>
 

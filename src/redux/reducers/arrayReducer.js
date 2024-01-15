@@ -1,4 +1,4 @@
-import { CREATE_ARRAY } from '../actions/types';
+import { CREATE_ARRAY, SPEED_ONCHANGE } from '../actions/types';
 
 const ARRAY = [
   330, 492, 420, 381, 498, 482, 334, 378, 46, 293, 413, 33, 234, 196, 257, 0,
@@ -7,6 +7,7 @@ const ARRAY = [
 
 const initState = {
   array: ARRAY,
+  speed: 250,
 }
 
 
@@ -14,6 +15,8 @@ const arrayReducer = (state=initState, action) => {
   switch(action.type) {
     case CREATE_ARRAY:
       return { ...state, array: action.payload }
+    case SPEED_ONCHANGE:
+      return { ...state, speed: action.payload }
     default: return state;
   }
 }
