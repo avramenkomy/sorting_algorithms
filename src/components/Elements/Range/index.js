@@ -1,25 +1,28 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
-import VolumeUp from '@mui/icons-material/VolumeUp';
+
+import {
+  Box, Grid, Typography, Slider,
+} from '@mui/material';
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
 function RangeElement(props) {
-  const [value, setValue] = React.useState(30);
+  const { val, label, max, min, step, onChange } = props;
+
+  const [value, setValue] = useState(val);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+    onChange(newValue);
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? 0 : Number(event.target.value));
+    onChange(event.target.value === '' ? 0 : Number(event.target.value));
   };
 
   const handleBlur = () => {
@@ -31,9 +34,9 @@ function RangeElement(props) {
   };
 
   return (
-    <Box >
+    <Box>
       <Typography id="input-slider" gutterBottom>
-        {props.label}
+        {label}
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
@@ -41,6 +44,9 @@ function RangeElement(props) {
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
+            min={min}
+            max={max}
+            step={step}
           />
         </Grid>
         <Grid item>
