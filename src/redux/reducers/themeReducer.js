@@ -1,7 +1,7 @@
 import { SET_DARK_THEME, SET_LIGHT_THEME } from '../actions/types';
 
 const initState = {
-  mode: 'light',
+  mode: 'dark',
 }
 
 
