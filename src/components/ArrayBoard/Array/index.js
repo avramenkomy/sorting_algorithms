@@ -10,7 +10,10 @@ import ArrayElement from './item';
 
 
 function ArrayComponent() {
-  const array = useSelector(state => state.array.array);
+  const array_state = useSelector(state => state.array);
+  const array = array_state.array;
+  const active = array_state.active;
+  const sorted = array_state.sorted;
 
   const max = Math.max(...array);
   const screenWidth = useResize().width;
@@ -32,9 +35,8 @@ function ArrayComponent() {
           w={elemWidth}
           h={item}
           max={max}
-          color="red"
-          active={index === 4}
-          sorted={index === 32}
+          active={active.includes(index)}
+          sorted={sorted.includes(index)}
         />
       ))}
     </div>

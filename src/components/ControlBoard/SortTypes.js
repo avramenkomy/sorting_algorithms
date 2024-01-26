@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Paper, Box, Grid, Button } from '@mui/material';
+// import swap from '../../utils/swap';
+// import sleep from '../../utils/sleep';
 
 
 const SORT_TYPES = [
@@ -12,10 +14,15 @@ const SORT_TYPES = [
   'Shell',
   'Bucket',
   'Heap',
+  'Iteration',
 ]
 
 
-function SortTypes() {
+function SortTypes({ sorting }) {
+
+  const handleClick = type => {
+    sorting(type.toLowerCase());
+  }
 
   return(
     <Box
@@ -38,7 +45,9 @@ function SortTypes() {
         >
           {SORT_TYPES.map(item => (
             <Grid item key={item}>
-              <Button variant="contained">{item}</Button>
+              <Button variant="contained" onClick={() => { handleClick(item)}}>
+                {item}
+              </Button>
             </Grid>
           ))}
         </Grid>

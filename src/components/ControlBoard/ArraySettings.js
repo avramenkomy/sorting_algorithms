@@ -28,7 +28,7 @@ function ArraySettings() {
 
   useEffect(() => {
     dispatch(setSortingSpeed(sortSpeed));
-  }, [sortSpeed]);
+  }, [sortSpeed, dispatch]);
 
   const createNewArray = () => {
     dispatch(setArray(arrSize, 0, 1000));
