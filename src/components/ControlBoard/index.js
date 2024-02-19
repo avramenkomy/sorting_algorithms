@@ -46,7 +46,7 @@ function ControlBoard() {
         dispatch(arrayOnChange(array));
       }
 
-      await sleep(speed);
+      await sleep(500 - speed);
     }
 
     dispatch(setActive([]));
