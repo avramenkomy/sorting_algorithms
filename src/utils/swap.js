@@ -1,7 +1,7 @@
 export default function swap(arr, i, j) {
-  let new_array = Array.from(arr);
+  let newArray = Array.from(arr);
 
-  [new_array[i], new_array[j]] = [new_array[j], new_array[i]];
+  [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
 
-  return new_array;
+  return newArray;
 }

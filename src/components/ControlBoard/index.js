@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setActive } from '../../redux/actions/setActive';
-import sleep from '../../utils/sleep';
-import { iteration } from '../../utils/iteration';
+import { setSorted } from '../../redux/actions/setSorted';
+import { arrayOnChange } from '../../redux/actions/arrayOnChange';
+import { iteration, bubbles, sleep } from '../../utils';
 
 import { Grid } from '@mui/material';
 import ArraySettings from './ArraySettings';
@@ -12,7 +13,7 @@ import SortTypes from './SortTypes';
 function ControlBoard() {
   const dispatch = useDispatch();
   const array_state = useSelector(state => state.array);
-  const array = array_state.array;
+  let array = array_state.array;
   const speed = array_state.speed;
 
   async function sorting(type) {
@@ -20,6 +21,8 @@ function ControlBoard() {
 
     if (type === 'iteration') {
       actions = iteration(array);
+    } else if ( type === 'bubbles') {
+      actions = bubbles(array);
     }
 
     await parseActions(actions);
@@ -32,6 +35,17 @@ function ControlBoard() {
       if (id === 'setActive') {
         dispatch(setActive(elems));
       }
+
+      if (id === 'setSorted') {
+        dispatch(setSorted(elems));
+      }
+
+      if (id === 'swap') {
+        [array[elems[0]], array[elems[1]]] = [array[elems[1]], array[elems[0]]]
+
+        dispatch(arrayOnChange(array));
+      }
+
       await sleep(speed);
     }
 

@@ -1,5 +1,5 @@
 import {
-  CREATE_ARRAY, SPEED_ONCHANGE, SET_ACTIVE, SET_SORTED,
+  CREATE_ARRAY, ARRAY_ONCHANGE, SPEED_ONCHANGE, SET_ACTIVE, SET_SORTED,
 } from '../actions/types';
 
 const ARRAY = [
@@ -18,11 +18,13 @@ const initState = {
 const arrayReducer = (state=initState, action) => {
   switch(action.type) {
     case CREATE_ARRAY:
+      return { ...state, active: [], sorted: [], array: action.payload }
+    case ARRAY_ONCHANGE:
       return { ...state, array: action.payload }
     case SET_ACTIVE:
       return { ...state, active: action.payload }
     case SET_SORTED:
-      return { ...state, sorted: action.payload }
+      return { ...state, sorted: [ ...state.sorted, ...action.payload ] }
     case SPEED_ONCHANGE:
       return { ...state, speed: action.payload }
     default: return state;
