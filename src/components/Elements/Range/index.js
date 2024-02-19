@@ -34,7 +34,7 @@ function RangeElement(props) {
   };
 
   return (
-    <Box>
+    <Box pl={2} pr={2}>
       <Typography id="input-slider" gutterBottom>
         {label}
       </Typography>
