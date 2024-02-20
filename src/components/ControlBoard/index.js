@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActive } from '../../redux/actions/setActive';
 import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
-import { iteration, bubbles, sleep } from '../../utils';
+import { iteration, bubbles, selection, sleep } from '../../utils';
 
 import { Grid } from '@mui/material';
 import ArraySettings from './ArraySettings';
@@ -23,6 +23,8 @@ function ControlBoard() {
       actions = iteration(array);
     } else if ( type === 'bubbles') {
       actions = bubbles(array);
+    } else if ( type === 'selection') {
+      actions = selection(array);
     }
 
     await parseActions(actions);
