@@ -9,9 +9,8 @@ export default function bubblesSort (arr) {
       actions.push({ id: 'setActive', elems: [j, j + 1]});
       if (newArray[j] > newArray[j + 1]) {
         actions.push({ id: 'swap', elems: [j, j + 1] });
-        const tmp = newArray[j];
-        newArray[j] = newArray[j + 1];
-        newArray[j + 1] = tmp;
+
+        [newArray[j], newArray[j + 1]] = [newArray[j + 1], newArray[j]];
       }
     }
     actions.push({ id: 'setSorted', elems: [newArray.length - i - 1] });
