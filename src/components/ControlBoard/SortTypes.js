@@ -1,8 +1,6 @@
 import React from 'react';
 
 import { Paper, Box, Grid, Button } from '@mui/material';
-// import swap from '../../utils/swap';
-// import sleep from '../../utils/sleep';
 
 
 const SORT_TYPES = [
