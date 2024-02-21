@@ -7,7 +7,7 @@ const SORT_TYPES = [
   'Bubbles',
   'Selection',
   // 'Merge',
-  // 'Quick',
+  'Quick',
   // 'Insertion',
   // 'Shell',
   // 'Bucket',
