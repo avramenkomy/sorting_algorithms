@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActive } from '../../redux/actions/setActive';
 import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
-import { iteration, bubbles, selection, quick, sleep } from '../../utils';
+import { iteration, bubbles, selection, quick, insertion, sleep } from '../../utils';
 
 import { Grid } from '@mui/material';
 import ArraySettings from './ArraySettings';
@@ -28,6 +28,10 @@ function ControlBoard() {
     } else if ( type === 'quick') {
       const arrayCopy = Array.from(array);
       quick(arrayCopy, 0, arrayCopy.length - 1, actions);
+    } else if ( type === 'insertion' ) {
+      let arrayCopy = Array.from(array);
+      arrayCopy = insertion(arrayCopy, actions);
+      // dispatch(arrayOnChange(arrayCopy));
     }
 
     await parseActions(actions);
