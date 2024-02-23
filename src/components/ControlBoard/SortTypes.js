@@ -11,7 +11,7 @@ const SORT_TYPES = [
   'Insertion',
   'Shell',
   // 'Bucket',
-  // 'Heap',
+  'Heap',
   'Iteration',
 ]
 

@@ -5,7 +5,7 @@ import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
 import {
   iteration, sleep,
-  bubbles, selection, quick, insertion, shell,
+  bubbles, selection, quick, insertion, shell, heap,
 } from '../../utils';
 
 import { Grid } from '@mui/material';
@@ -35,6 +35,9 @@ function ControlBoard() {
       arrayCopy = insertion(arrayCopy, actions);
     } else if ( type === 'shell') {
       arrayCopy = shell(arrayCopy, actions);
+    } else if (type === 'heap') {
+      heap(arrayCopy, actions);
+      // dispatch(arrayOnChange(arrayCopy));
     }
 
     await parseActions(actions);
