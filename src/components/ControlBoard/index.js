@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActive } from '../../redux/actions/setActive';
 import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
-import { iteration, bubbles, selection, quick, insertion, sleep } from '../../utils';
+import {
+  iteration, sleep,
+  bubbles, selection, quick, insertion, shell,
+} from '../../utils';
 
 import { Grid } from '@mui/material';
 import ArraySettings from './ArraySettings';
@@ -18,6 +21,7 @@ function ControlBoard() {
 
   async function sorting(type) {
     let actions = [];
+    let arrayCopy = Array.from(array);
 
     if (type === 'iteration') {
       actions = iteration(array);
@@ -26,12 +30,11 @@ function ControlBoard() {
     } else if ( type === 'selection') {
       actions = selection(array);
     } else if ( type === 'quick') {
-      const arrayCopy = Array.from(array);
       quick(arrayCopy, 0, arrayCopy.length - 1, actions);
     } else if ( type === 'insertion' ) {
-      let arrayCopy = Array.from(array);
       arrayCopy = insertion(arrayCopy, actions);
-      // dispatch(arrayOnChange(arrayCopy));
+    } else if ( type === 'shell') {
+      arrayCopy = shell(arrayCopy, actions);
     }
 
     await parseActions(actions);

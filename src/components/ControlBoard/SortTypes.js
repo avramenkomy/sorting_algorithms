@@ -9,7 +9,7 @@ const SORT_TYPES = [
   // 'Merge',
   'Quick',
   'Insertion',
-  // 'Shell',
+  'Shell',
   // 'Bucket',
   // 'Heap',
   'Iteration',

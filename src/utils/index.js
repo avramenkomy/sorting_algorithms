@@ -6,3 +6,4 @@ export { default as bubbles } from './sort_algorithms/bubbles';
 export { default as selection } from './sort_algorithms/selection';
 export { default as quick } from './sort_algorithms/quick';
 export { default as insertion } from './sort_algorithms/insertion';
+export { default as shell } from './sort_algorithms/shell';
