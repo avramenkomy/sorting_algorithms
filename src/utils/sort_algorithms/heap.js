@@ -6,7 +6,6 @@ export default function heapSort(array, actions) {
   }
 
   for (let i = size - 1; i >= 0; i--) {
-    console.log('swap sort');
     actions.push({id: 'swap', elems: [0, i]});
     [array[i], array[0]] = [array[0], array[i]];
     actions.push({id: 'setSorted', elems: [i]});
@@ -30,7 +29,6 @@ function heapify(array, size, i, actions) {
   }
 
   if (max != i) {
-    console.log('swap heapify');
     actions.push({id: 'swap', elems: [i, max]});
     [array[i], array[max]] = [array[max], array[i]];
 
