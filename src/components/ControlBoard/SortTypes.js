@@ -6,7 +6,7 @@ import { Paper, Box, Grid, Button } from '@mui/material';
 const SORT_TYPES = [
   'Bubbles',
   'Selection',
-  // 'Merge',
+  'Merge',
   'Quick',
   'Insertion',
   'Shell',

@@ -5,7 +5,7 @@ import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
 import {
   iteration, sleep,
-  bubbles, selection, quick, insertion, shell, heap,
+  bubbles, selection, quick, insertion, shell, heap, merge,
 } from '../../utils';
 
 import { Grid } from '@mui/material';
@@ -37,7 +37,8 @@ function ControlBoard() {
       arrayCopy = shell(arrayCopy, actions);
     } else if (type === 'heap') {
       heap(arrayCopy, actions);
-      // dispatch(arrayOnChange(arrayCopy));
+    } else if ( type === 'merge') {
+      merge(arrayCopy, actions);
     }
 
     await parseActions(actions);
@@ -45,7 +46,7 @@ function ControlBoard() {
 
   async function parseActions(actions) {
     for (let action of actions) {
-      const { id, elems } = action;
+      let { id, elems } = action;
 
       if (id === 'setActive') {
         dispatch(setActive(elems));
@@ -56,8 +57,17 @@ function ControlBoard() {
       }
 
       if (id === 'swap') {
-        [array[elems[0]], array[elems[1]]] = [array[elems[1]], array[elems[0]]]
+        elems = Array.from(new Set(elems));
+        if (elems.length === 2) {
+          [array[elems[0]], array[elems[1]]] = [array[elems[1]], array[elems[0]]];
+        } else if (elems.length === 3) {
+          [array[elems[0]], array[elems[1]], array[elems[2]]] = [array[elems[2]], array[elems[0]], array[elems[1]]];
+        }
+        dispatch(arrayOnChange(array));
+      }
 
+      if (id === 'setElem') {
+        array[elems[0]] = elems[1];
         dispatch(arrayOnChange(array));
       }
 

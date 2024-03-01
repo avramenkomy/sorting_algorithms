@@ -15,7 +15,7 @@ function ArrayComponent() {
   const active = array_state.active;
   const sorted = array_state.sorted;
 
-  const max = Math.max(...array);
+  const max = array_state.max;
   const screenWidth = useResize().width;
 
   /**
@@ -28,6 +28,14 @@ function ArrayComponent() {
 
   return (
     <div className='array-container'>
+      {/* FIXME: Костыль, добавляется невидымый элемент с максимальной
+      высотой чтобы избежать изменения высоты контейнера для массива
+      при сортировке merge в момент когда максимальный элемент попадает в
+      буфферный массив и его место занимает следующий максимальный элемент,
+      который меньше начального максимального элемента, так как высота
+      контейнера для массива вычисляется по максимальному элементу. */}
+      <ArrayElement w={0} h={max} max={max} display="hidden" />
+
       {array.map((item, index) => (
         <ArrayElement
           key={uniqid()}

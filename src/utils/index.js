@@ -8,3 +8,4 @@ export { default as quick } from './sort_algorithms/quick';
 export { default as insertion } from './sort_algorithms/insertion';
 export { default as shell } from './sort_algorithms/shell';
 export { default as heap } from './sort_algorithms/heap';
+export { default as merge } from './sort_algorithms/merge';

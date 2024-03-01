@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '@emotion/react';
 
 function ArrayElement(props) {
-  const { id, w, h, active, sorted, max } = props;
+  const { id, w, h, active, sorted, max, display } = props;
 
   const elemHeight = ((window.innerHeight - 350) * h / max) + 3;
 
@@ -21,6 +21,8 @@ function ArrayElement(props) {
         height: elemHeight,
         backgroundColor: bgColor,
         borderColor: elemBackground,
+        /** FIXME: Костыль, описание в родительском компоненте */
+        visibility: display === 'hidden' ? 'hidden' : 'visible'
       }}
     />
   )

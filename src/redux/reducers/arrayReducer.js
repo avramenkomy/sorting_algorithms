@@ -12,13 +12,14 @@ const initState = {
   speed: 250,
   active: [],
   sorted: [],
+  max: 1000,
 }
 
 
 const arrayReducer = (state=initState, action) => {
   switch(action.type) {
     case CREATE_ARRAY:
-      return { ...state, active: [], sorted: [], array: action.payload }
+      return { ...state, active: [], sorted: [], array: action.payload, max: Math.max(...action.payload) }
     case ARRAY_ONCHANGE:
       return { ...state, array: action.payload }
     case SET_ACTIVE:
