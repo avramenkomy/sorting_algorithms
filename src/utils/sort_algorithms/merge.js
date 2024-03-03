@@ -35,7 +35,6 @@ function Merge(a, low, mid, high, actions, arr) {
   for (k=0; k <= high-low; k++) {
     if (k === b.length - 1) {
       for(let i = 0; i < b.length; i++) {
-        const idx = arr.lastIndexOf(b[i]);
         actions.push({id: 'setElem', elems: [i, b[i]]});
       }
     }

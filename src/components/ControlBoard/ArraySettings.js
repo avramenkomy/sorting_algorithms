@@ -13,14 +13,13 @@ function ArraySettings() {
 
   const dispatch = useDispatch();
   const screenWidth = useResize().width;
+  const array_state = useSelector(state => state.array);
 
   const [ maxArraySize, setMaxArraySize ] = useState(
     Math.floor((screenWidth - 36) / 3)
   );
-  const [ arrSize, setArrSize ] = useState(20);
-  const [ sortSpeed, setSortSpeed ] = useState(
-    useSelector(state => state.array.speed)
-  );
+  const [ arrSize, setArrSize ] = useState(array_state.array.length);
+  const [ sortSpeed, setSortSpeed ] = useState(array_state.speed);
 
   useEffect(() => {
     setMaxArraySize(Math.floor((screenWidth - 36) / 3));

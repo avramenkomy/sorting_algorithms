@@ -23,22 +23,30 @@ function ControlBoard() {
     let actions = [];
     let arrayCopy = Array.from(array);
 
-    if (type === 'iteration') {
-      actions = iteration(array);
-    } else if ( type === 'bubbles') {
-      actions = bubbles(array);
-    } else if ( type === 'selection') {
-      actions = selection(array);
-    } else if ( type === 'quick') {
-      quick(arrayCopy, 0, arrayCopy.length - 1, actions);
-    } else if ( type === 'insertion' ) {
-      arrayCopy = insertion(arrayCopy, actions);
-    } else if ( type === 'shell') {
-      arrayCopy = shell(arrayCopy, actions);
-    } else if (type === 'heap') {
-      heap(arrayCopy, actions);
-    } else if ( type === 'merge') {
-      merge(arrayCopy, actions);
+    switch(type) {
+      case 'bubbles':
+        actions = bubbles(array);
+        break;
+      case 'selection':
+        actions = selection(array);
+        break;
+      case 'quick':
+        quick(arrayCopy, 0, arrayCopy.length - 1, actions);
+        break;
+      case 'insertion':
+        arrayCopy = insertion(arrayCopy, actions);
+        break;
+      case 'shell':
+        arrayCopy = shell(arrayCopy, actions);
+        break;
+      case 'heap':
+        heap(arrayCopy, actions);
+        break;
+      case 'merge':
+        merge(arrayCopy, actions);
+        break;
+      default:
+        actions = iteration(array);
     }
 
     await parseActions(actions);
@@ -48,27 +56,34 @@ function ControlBoard() {
     for (let action of actions) {
       let { id, elems } = action;
 
-      if (id === 'setActive') {
-        dispatch(setActive(elems));
-      }
-
-      if (id === 'setSorted') {
-        dispatch(setSorted(elems));
-      }
-
-      if (id === 'swap') {
-        elems = Array.from(new Set(elems));
-        if (elems.length === 2) {
-          [array[elems[0]], array[elems[1]]] = [array[elems[1]], array[elems[0]]];
-        } else if (elems.length === 3) {
-          [array[elems[0]], array[elems[1]], array[elems[2]]] = [array[elems[2]], array[elems[0]], array[elems[1]]];
-        }
-        dispatch(arrayOnChange(array));
-      }
-
-      if (id === 'setElem') {
-        array[elems[0]] = elems[1];
-        dispatch(arrayOnChange(array));
+      switch(id) {
+        case 'setActive':
+          dispatch(setActive(elems));
+          break;
+        case 'setSorted':
+          dispatch(setSorted(elems));
+          break;
+        case 'swap':
+          elems = Array.from(new Set(elems));
+          if (elems.length === 2) {
+            const a = elems[0];
+            const b = elems[1];
+            [array[a], array[b]] = [array[b], array[a]];
+          } else if (elems.length === 3) {
+            const a = elems[0];
+            const b = elems[1];
+            const c = elems[2];
+            [array[a], array[b], array[c]] = [array[c], array[a], array[b]];
+          }
+          dispatch(arrayOnChange(array));
+          break;
+        case 'setElem':
+          const index = elems[0];
+          const value = elems[1];
+          array[index] = value;
+          dispatch(arrayOnChange(array));
+          break;
+        default: // do nothing
       }
 
       await sleep(500 - speed);
