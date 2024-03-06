@@ -12,6 +12,7 @@ const SORT_TYPES = [
   'Shell',
   'Bucket',
   'Heap',
+  'Cocktail',
   'Iteration',
 ]
 

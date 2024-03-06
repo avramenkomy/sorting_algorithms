@@ -5,7 +5,7 @@ import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
 import {
   iteration, sleep,
-  bubbles, selection, quick, insertion, shell, heap, merge, bucket,
+  bubbles, selection, quick, insertion, shell, heap, merge, bucket, cocktail,
 } from '../../utils';
 
 import { Grid } from '@mui/material';
@@ -47,6 +47,9 @@ function ControlBoard() {
         break;
       case 'bucket':
         bucket(arrayCopy, 'bubbles', actions);
+        break;
+      case 'cocktail':
+        cocktail(array, actions);
         break;
       default:
         actions = iteration(array);
