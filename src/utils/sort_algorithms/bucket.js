@@ -3,7 +3,6 @@ export default function bucketSort(array, type='bubbles', actions) {
 
   const bucketsCnt = Math.ceil(arr.length / 10);
   const maxElement = Math.max(...arr);
-  const minElement = Math.min(...arr);
   let buckets = {};
 
   for (let i = 1; i <= bucketsCnt; i++) {
