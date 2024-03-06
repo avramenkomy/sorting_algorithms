@@ -11,7 +11,7 @@ const Input = styled(MuiInput)`
 `;
 
 function RangeElement(props) {
-  const { val, label, max, min, step, onChange } = props;
+  const { val, label, max, min, step, onChange, inputView, marks } = props;
 
   const [value, setValue] = useState(val);
 
@@ -28,8 +28,8 @@ function RangeElement(props) {
   const handleBlur = () => {
     if (value < 0) {
       setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    } else if (value > max) {
+      setValue(max);
     }
   };
 
@@ -47,9 +47,11 @@ function RangeElement(props) {
             min={min}
             max={max}
             step={step}
+            marks={marks}
+            size="small"
           />
         </Grid>
-        <Grid item>
+        {inputView && <Grid item>
           <Input
             value={value}
             size="small"
@@ -58,12 +60,12 @@ function RangeElement(props) {
             inputProps={{
               step: 10,
               min: 0,
-              max: 100,
+              max: max,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
           />
-        </Grid>
+        </Grid>}
       </Grid>
     </Box>
   );

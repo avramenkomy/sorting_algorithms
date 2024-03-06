@@ -33,6 +33,10 @@ function ArraySettings() {
     dispatch(setArray(arrSize, 0, 1000));
   }
 
+  const speedOnChange = value => {
+    setSortSpeed(value);
+  }
+
   return(
     <Box
       sx={{
@@ -67,6 +71,7 @@ function ArraySettings() {
                 min={10}
                 max={maxArraySize}
                 onChange={newValue => setArrSize(newValue)}
+                inputView
               />
             </Grid>
 
@@ -77,7 +82,8 @@ function ArraySettings() {
                 min={0}
                 max={500}
                 step={10}
-                onChange={newValue => setSortSpeed(newValue)}
+                onChange={speedOnChange}
+                marks={[{value: 0, label: 'Slow'}, {value: 500, label: 'Fast'}]}
               />
             </Grid>
           </Grid>
