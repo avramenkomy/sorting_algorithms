@@ -8,7 +8,6 @@ function ArrayBoard() {
 
   return(
     <Box
-      id="array_container"
       sx={{
         display: 'flex',
         width: '100%',
