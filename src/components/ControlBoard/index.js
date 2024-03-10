@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActive } from '../../redux/actions/setActive';
 import { setSorted } from '../../redux/actions/setSorted';
 import { arrayOnChange } from '../../redux/actions/arrayOnChange';
+import { setDisableSortButtons } from '../../redux/actions/setDisableSortButtons';
 import {
   iteration, sleep,
   bubbles, selection, quick, insertion, shell, heap, merge, bucket, cocktail,
@@ -59,6 +60,8 @@ function ControlBoard() {
   }
 
   async function parseActions(actions) {
+    dispatch(setDisableSortButtons(true));
+
     for (let action of actions) {
       let { id, elems } = action;
 
@@ -96,6 +99,7 @@ function ControlBoard() {
     }
 
     dispatch(setActive([]));
+    dispatch(setDisableSortButtons(false));
   }
 
   return(

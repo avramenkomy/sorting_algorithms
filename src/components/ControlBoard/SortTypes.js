@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Paper, Box, Grid, Button } from '@mui/material';
 
@@ -18,6 +19,7 @@ const SORT_TYPES = [
 
 
 function SortTypes({ sorting }) {
+  const disableButtons = useSelector(state => state.state.sortButtonsDisable);
 
   const handleClick = type => {
     sorting(type.toLowerCase());
@@ -44,7 +46,11 @@ function SortTypes({ sorting }) {
         >
           {SORT_TYPES.map(item => (
             <Grid item key={item}>
-              <Button variant="contained" onClick={() => { handleClick(item)}}>
+              <Button
+                variant="contained"
+                onClick={() => { handleClick(item)}}
+                disabled={disableButtons}
+              >
                 {item}
               </Button>
             </Grid>
